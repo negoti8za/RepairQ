@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(java:*)",
+      "Bash(ls:*)",
+      "Bash(mvn:*)",
+      "Bash(jpackage:*)"
+    ]
+  }
+}

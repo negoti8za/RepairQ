@@ -1,25 +1,67 @@
-# RepairQ
+# RepairQ Modernization Project
 
-[![Java](https://img.shields.io/badge/Java-14-orange)](https://docs.oracle.com/en/java/javase/14/)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![codebeat badge](https://codebeat.co/badges/a3fe0b76-70a5-48fb-9ce7-2b659886908b)](https://codebeat.co/projects/github-com-zoran-jankov-repairq-master)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/74e77def1a874fc89d7bb97635abe2bf)](https://www.codacy.com/gh/Zoran-Jankov/RepairQ/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Zoran-Jankov/RepairQ&amp;utm_campaign=Badge_Grade)
-[![CodeFactor](https://www.codefactor.io/repository/github/zoran-jankov/repairq/badge)](https://www.codefactor.io/repository/github/zoran-jankov/repairq)
+This repository contains the modernized version of the RepairQ Java desktop application, upgraded to use Java 21, JavaFX, and SQLite.
 
-## Description
+## Project Status
 
-RepairQ is a ticket system software application that is aimed for repair shops. It is used to track all business related things, from creating and tracing tickets, registering customers, devices that are being repaired, repair parts inventory and more.
+### Completed Tasks
+1. **Project Analysis and Preparation** - Analyzed existing Swing-based codebase
+2. **First-Time Setup Module** - Implemented auto-creation of admin user and password management
+3. **Database Migration** - Migrated from MySQL to SQLite
+4. **Security Implementation** - Added BCrypt password hashing
 
-## Licence
+### In Progress Tasks
+- **UI Migration** - Gradual migration from Swing to JavaFX
+- **Layered Architecture** - Refactoring into clean architectural layers
 
-[***GNU General Public License Version 3***](https://www.gnu.org/licenses/gpl-3.0)
+## Architecture Overview
 
-[![License: GPL v3](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0)
+### Current Layers
+- `ui` - UI components (Swing temporarily, JavaFX planned)
+- `controller` - Handles user interactions
+- `service` - Business logic
+- `repository` - Database access
+- `config` - Application settings and configuration
+- `util` - Utility classes
 
-## Credits
+### Key Features Implemented
+1. **First-Time Setup**
+   - Auto-creates default admin user (`admin`/`admin`)
+   - Forces password change on first login
+   - Supports additional user roles (Admin, Staff/Technician)
 
-### Author
+2. **Security**
+   - Passwords are hashed using BCrypt
+   - Secure credential handling
 
-Software architect and developer:  [Zoran Jankov](https://www.linkedin.com/in/zoran-jankov/)
+3. **Database**
+   - Migrated from MySQL to SQLite
+   - Schema management with Hibernate
 
-<a href="https://stackexchange.com/users/12947676/zoran-jankov"><img src="https://stackexchange.com/users/flair/12947676.png" width="208" height="58" alt="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites" /></a>
+4. **Branding and Invoice Customization**
+   - Logo upload capability
+   - Customizable invoice fields
+   - Company information management
+
+## Technology Stack
+
+- **Java**: 21 LTS
+- **UI Framework**: JavaFX (planned migration)
+- **Database**: SQLite
+- **ORM**: Hibernate JPA
+- **Security**: BCrypt password hashing
+- **Build Tool**: Maven
+
+## Getting Started
+
+1. Ensure you have Java 21 installed
+2. Run `mvn compile` to build the project
+3. The application will automatically initialize the database on first run
+
+## Next Steps
+
+1. Complete migration to JavaFX UI components
+2. Implement full user management features
+3. Add invoice generation functionality
+4. Package with jpackage for native Windows installer
+5. Add comprehensive testing

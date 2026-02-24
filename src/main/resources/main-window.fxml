@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="http://javafx.com/fxml/1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/11.0.1"?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.repairq.controller.MainWindowController"
+            prefHeight="600.0" prefWidth="800.0">
+   <top>
+      <MenuBar>
+         <menus>
+            <Menu text="File">
+               <items>
+                  <MenuItem text="Exit" onAction="#handleExit" />
+               </items>
+            </Menu>
+            <Menu text="Edit">
+               <items>
+                  <MenuItem text="Preferences" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Tickets">
+               <content>
+                  <Label text="Tickets View" />
+               </content>
+            </Tab>
+            <Tab text="Notifications">
+               <content>
+                  <Label text="Notifications View" />
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
