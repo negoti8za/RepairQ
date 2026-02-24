@@ -9,3 +9,17 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+# Large distribution files - use releases page or build locally
+RepairQ-Installer-v1.0.zip
+RepairQ-Portable-v1.0.zip
+RepairQ/runtime/
+RepairQ/*.exe
+
+# Build artifacts
+*.class
+*.log
+
+# Temporary files
+*.tmp
+wix311.exe
+wix-install.log

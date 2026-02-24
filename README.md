@@ -54,14 +54,54 @@ This repository contains the modernized version of the RepairQ Java desktop appl
 
 ## Getting Started
 
-1. Ensure you have Java 21 installed
-2. Run `mvn compile` to build the project
-3. The application will automatically initialize the database on first run
+### Quick Start (Windows Desktop)
+
+**Requirements**: Java 21 LTS installed and in PATH
+
+```cmd
+REM Run the application
+RepairQ-Run.bat
+
+REM Or manually:
+java -Xmx512m -jar RepairQ-0.0.1-SNAPSHOT.jar
+```
+
+> ⚠️ **Note**: JavaFX requires native libraries. See [WINDOWS-DEPLOYMENT.md](WINDOWS-DEPLOYMENT.md) for solutions if you get "JavaFX runtime components missing" error.
+
+### Building from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/negoti8za/RepairQ.git
+cd RepairQ
+
+# Build with Maven
+mvn clean package
+
+# Run the application (requires JavaFX SDK setup)
+java -Xmx512m \
+  --add-modules javafx.controls,javafx.fxml \
+  --module-path /path/to/javafx-sdk-21/lib \
+  -jar target/RepairQ-0.0.1-SNAPSHOT.jar
+
+# Or use the batch launcher
+RepairQ-Run.bat
+```
+
+### Deployment Guide
+
+For detailed deployment instructions, including:
+- Running with existing Java installation
+- Setting up JavaFX SDK
+- Building native Windows installers
+- jpackage configuration
+
+👉 See: [WINDOWS-DEPLOYMENT.md](WINDOWS-DEPLOYMENT.md)
 
 ## Next Steps
 
 1. Complete migration to JavaFX UI components
 2. Implement full user management features
 3. Add invoice generation functionality
-4. Package with jpackage for native Windows installer
+4. Create native Windows installers with jpackage
 5. Add comprehensive testing
