@@ -2,13 +2,30 @@
 Application Configuration - Constants, colors, roles, settings
 """
 
+import os
+from pathlib import Path
+
 # Application Info
 APP_NAME = "RepairQ"
 APP_VERSION = "2.0.0"
 APP_AUTHOR = "Zoran Jankov"
 
-# Database
-DATABASE_PATH = "repairq.db"
+
+def get_app_data_dir() -> Path:
+    """Return the user-writable app data directory (%APPDATA%/RepairQ).
+
+    Using AppData/Roaming means the app works when installed in
+    Program Files (read-only for normal users) as well as when
+    run as a portable EXE.
+    """
+    app_data = os.environ.get("APPDATA") or Path.home() / "AppData" / "Roaming"
+    data_dir = Path(app_data) / "RepairQ"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    return data_dir
+
+
+# Database - stored in user AppData so it is always writable
+DATABASE_PATH = str(get_app_data_dir() / "repairq.db")
 
 # User Roles
 ROLE_ADMIN = "ADMIN"

@@ -8,8 +8,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 from src.utils.logger import AppLogger
-
-DATABASE_PATH = "repairq.db"
+from src.config import DATABASE_PATH
 ROLE_ADMIN = "ADMIN"
 ROLE_STAFF = "STAFF"
 ROLE_TECHNICIAN = "TECHNICIAN"

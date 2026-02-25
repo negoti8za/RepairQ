@@ -40,7 +40,7 @@ Section "RepairQ Application" SecMain
     SetOutPath "$INSTDIR"
 
     ; Copy all files from the PyInstaller onedir build
-    File /r "dist-dir\RepairQ\*.*"
+    File /r "dist\RepairQ\*.*"
 
     ; Create uninstaller
     WriteUninstaller "$INSTDIR\Uninstall.exe"

@@ -6,6 +6,7 @@ import logging
 import os
 from datetime import datetime
 from pathlib import Path
+from src.config import get_app_data_dir
 
 
 class AppLogger:
@@ -16,11 +17,10 @@ class AppLogger:
     
     @classmethod
     def _ensure_log_dir(cls):
-        """Ensure log directory exists"""
+        """Ensure log directory exists inside the user-writable AppData folder"""
         if cls._log_dir is None:
-            # Create logs directory in app root
-            log_dir = Path(os.getcwd()) / "logs"
-            log_dir.mkdir(exist_ok=True)
+            log_dir = get_app_data_dir() / "logs"
+            log_dir.mkdir(parents=True, exist_ok=True)
             cls._log_dir = log_dir
         return cls._log_dir
     
