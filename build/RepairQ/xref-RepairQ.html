@@ -18,7 +18,8 @@
   <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/main.py" type="text/plain"><tt>main.py</tt></a>
 <span class="moduletype">Script</span>  <div class="import">
 imports:
-    <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
+    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
+ &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
  &#8226;   <a href="#_collections_abc">_collections_abc</a>
  &#8226;   <a href="#_weakrefset">_weakrefset</a>
  &#8226;   <a href="#abc">abc</a>
@@ -169,7 +170,11 @@ imports:
  &#8226;   <a href="#re._constants">re._constants</a>
  &#8226;   <a href="#re._parser">re._parser</a>
  &#8226;   <a href="#reprlib">reprlib</a>
- &#8226;   <a href="#services.database">services.database</a>
+ &#8226;   <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services.auth">src.services.auth</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#src.ui.login_window">src.ui.login_window</a>
+ &#8226;   <a href="#src.ui.main_window">src.ui.main_window</a>
  &#8226;   <a href="#sre_compile">sre_compile</a>
  &#8226;   <a href="#sre_constants">sre_constants</a>
  &#8226;   <a href="#sre_parse">sre_parse</a>
@@ -177,7 +182,6 @@ imports:
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#types">types</a>
- &#8226;   <a href="#ui.login_window">ui.login_window</a>
  &#8226;   <a href="#warnings">warnings</a>
  &#8226;   <a href="#weakref">weakref</a>
 
@@ -303,8 +307,15 @@ imported by:
     <a href="#PyQt6">PyQt6</a>
  &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
  &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
- &#8226;   <a href="#ui.login_window">ui.login_window</a>
- &#8226;   <a href="#ui.main_window">ui.main_window</a>
+ &#8226;   <a href="#main.py">main.py</a>
+ &#8226;   <a href="#src.ui.login_window">src.ui.login_window</a>
+ &#8226;   <a href="#src.ui.main_window">src.ui.main_window</a>
+ &#8226;   <a href="#src.ui.pages.admin_panel">src.ui.pages.admin_panel</a>
+ &#8226;   <a href="#src.ui.pages.customers">src.ui.pages.customers</a>
+ &#8226;   <a href="#src.ui.pages.dashboard">src.ui.pages.dashboard</a>
+ &#8226;   <a href="#src.ui.pages.devices">src.ui.pages.devices</a>
+ &#8226;   <a href="#src.ui.pages.invoices">src.ui.pages.invoices</a>
+ &#8226;   <a href="#src.ui.pages.repairs">src.ui.pages.repairs</a>
 
   </div>
 
@@ -329,8 +340,14 @@ imports:
 imported by:
     <a href="#PyQt6">PyQt6</a>
  &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
- &#8226;   <a href="#ui.login_window">ui.login_window</a>
- &#8226;   <a href="#ui.main_window">ui.main_window</a>
+ &#8226;   <a href="#src.ui.login_window">src.ui.login_window</a>
+ &#8226;   <a href="#src.ui.main_window">src.ui.main_window</a>
+ &#8226;   <a href="#src.ui.pages.admin_panel">src.ui.pages.admin_panel</a>
+ &#8226;   <a href="#src.ui.pages.customers">src.ui.pages.customers</a>
+ &#8226;   <a href="#src.ui.pages.dashboard">src.ui.pages.dashboard</a>
+ &#8226;   <a href="#src.ui.pages.devices">src.ui.pages.devices</a>
+ &#8226;   <a href="#src.ui.pages.invoices">src.ui.pages.invoices</a>
+ &#8226;   <a href="#src.ui.pages.repairs">src.ui.pages.repairs</a>
 
   </div>
 
@@ -355,8 +372,14 @@ imports:
   <div class="import">
 imported by:
     <a href="#main.py">main.py</a>
- &#8226;   <a href="#ui.login_window">ui.login_window</a>
- &#8226;   <a href="#ui.main_window">ui.main_window</a>
+ &#8226;   <a href="#src.ui.login_window">src.ui.login_window</a>
+ &#8226;   <a href="#src.ui.main_window">src.ui.main_window</a>
+ &#8226;   <a href="#src.ui.pages.admin_panel">src.ui.pages.admin_panel</a>
+ &#8226;   <a href="#src.ui.pages.customers">src.ui.pages.customers</a>
+ &#8226;   <a href="#src.ui.pages.dashboard">src.ui.pages.dashboard</a>
+ &#8226;   <a href="#src.ui.pages.devices">src.ui.pages.devices</a>
+ &#8226;   <a href="#src.ui.pages.invoices">src.ui.pages.invoices</a>
+ &#8226;   <a href="#src.ui.pages.repairs">src.ui.pages.repairs</a>
 
   </div>
 
@@ -2147,6 +2170,9 @@ imported by:
  &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#src.services.invoice_service">src.services.invoice_service</a>
+ &#8226;   <a href="#src.services.repair_service">src.services.repair_service</a>
 
   </div>
 
@@ -5555,7 +5581,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#random">random</a>
- &#8226;   <a href="#services.database">services.database</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
 
   </div>
@@ -6771,9 +6797,9 @@ imported by:
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
  &#8226;   <a href="#pyi_rth_pyqt6.py">pyi_rth_pyqt6.py</a>
  &#8226;   <a href="#random">random</a>
- &#8226;   <a href="#services.database">services.database</a>
  &#8226;   <a href="#shutil">shutil</a>
  &#8226;   <a href="#socket">socket</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#tarfile">tarfile</a>
@@ -6840,7 +6866,7 @@ imported by:
  &#8226;   <a href="#importlib.resources.abc">importlib.resources.abc</a>
  &#8226;   <a href="#importlib.resources.readers">importlib.resources.readers</a>
  &#8226;   <a href="#pathlib._os">pathlib._os</a>
- &#8226;   <a href="#services.database">services.database</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
  &#8226;   <a href="#zipfile._path">zipfile._path</a>
 
   </div>
@@ -7348,39 +7374,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="services"></a>
-  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/services/__init__.py" type="text/plain"><tt>services</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imported by:
-    <a href="#services.database">services.database</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="services.database"></a>
-  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/services/database.py" type="text/plain"><tt>services.database</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#hashlib">hashlib</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#pathlib">pathlib</a>
- &#8226;   <a href="#services">services</a>
- &#8226;   <a href="#sqlite3">sqlite3</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#main.py">main.py</a>
- &#8226;   <a href="#ui.login_window">ui.login_window</a>
- &#8226;   <a href="#ui.main_window">ui.main_window</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="shutil"></a>
   <a target="code" href="///C:/Python314/Lib/shutil.py" type="text/plain"><tt>shutil</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -7476,11 +7469,11 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#services.database">services.database</a>
- &#8226;   <a href="#sqlite3">sqlite3</a>
+    <a href="#sqlite3">sqlite3</a>
  &#8226;   <a href="#sqlite3.__main__">sqlite3.__main__</a>
  &#8226;   <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
  &#8226;   <a href="#sqlite3.dump">sqlite3.dump</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
 
   </div>
 
@@ -7539,6 +7532,402 @@ imports:
   <div class="import">
 imported by:
     <a href="#sqlite3">sqlite3</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/__init__.py" type="text/plain"><tt>src</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imported by:
+    <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services">src.services</a>
+ &#8226;   <a href="#src.ui">src.ui</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.config"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/config.py" type="text/plain"><tt>src.config</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#src">src</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+ &#8226;   <a href="#src.ui.login_window">src.ui.login_window</a>
+ &#8226;   <a href="#src.ui.main_window">src.ui.main_window</a>
+ &#8226;   <a href="#src.ui.pages.admin_panel">src.ui.pages.admin_panel</a>
+ &#8226;   <a href="#src.ui.pages.customers">src.ui.pages.customers</a>
+ &#8226;   <a href="#src.ui.pages.dashboard">src.ui.pages.dashboard</a>
+ &#8226;   <a href="#src.ui.pages.devices">src.ui.pages.devices</a>
+ &#8226;   <a href="#src.ui.pages.invoices">src.ui.pages.invoices</a>
+ &#8226;   <a href="#src.ui.pages.repairs">src.ui.pages.repairs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.services"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/services/__init__.py" type="text/plain"><tt>src.services</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#src">src</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.services.auth">src.services.auth</a>
+ &#8226;   <a href="#src.services.customer_service">src.services.customer_service</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#src.services.invoice_service">src.services.invoice_service</a>
+ &#8226;   <a href="#src.services.repair_service">src.services.repair_service</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.services.auth"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/services/auth.py" type="text/plain"><tt>src.services.auth</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#src.services">src.services</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+ &#8226;   <a href="#src.ui.login_window">src.ui.login_window</a>
+ &#8226;   <a href="#src.ui.main_window">src.ui.main_window</a>
+ &#8226;   <a href="#src.ui.pages.admin_panel">src.ui.pages.admin_panel</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.services.customer_service"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/services/customer_service.py" type="text/plain"><tt>src.services.customer_service</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#src.services">src.services</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.pages.customers">src.ui.pages.customers</a>
+ &#8226;   <a href="#src.ui.pages.dashboard">src.ui.pages.dashboard</a>
+ &#8226;   <a href="#src.ui.pages.devices">src.ui.pages.devices</a>
+ &#8226;   <a href="#src.ui.pages.invoices">src.ui.pages.invoices</a>
+ &#8226;   <a href="#src.ui.pages.repairs">src.ui.pages.repairs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.services.database"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/services/database.py" type="text/plain"><tt>src.services.database</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#datetime">datetime</a>
+ &#8226;   <a href="#hashlib">hashlib</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pathlib">pathlib</a>
+ &#8226;   <a href="#sqlite3">sqlite3</a>
+ &#8226;   <a href="#src.services">src.services</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+ &#8226;   <a href="#src.services.auth">src.services.auth</a>
+ &#8226;   <a href="#src.services.customer_service">src.services.customer_service</a>
+ &#8226;   <a href="#src.services.invoice_service">src.services.invoice_service</a>
+ &#8226;   <a href="#src.services.repair_service">src.services.repair_service</a>
+ &#8226;   <a href="#src.ui.login_window">src.ui.login_window</a>
+ &#8226;   <a href="#src.ui.pages.admin_panel">src.ui.pages.admin_panel</a>
+ &#8226;   <a href="#src.ui.pages.dashboard">src.ui.pages.dashboard</a>
+ &#8226;   <a href="#src.ui.pages.devices">src.ui.pages.devices</a>
+ &#8226;   <a href="#src.ui.pages.repairs">src.ui.pages.repairs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.services.invoice_service"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/services/invoice_service.py" type="text/plain"><tt>src.services.invoice_service</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#datetime">datetime</a>
+ &#8226;   <a href="#src.services">src.services</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#time">time</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.pages.invoices">src.ui.pages.invoices</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.services.repair_service"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/services/repair_service.py" type="text/plain"><tt>src.services.repair_service</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#datetime">datetime</a>
+ &#8226;   <a href="#src.services">src.services</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#time">time</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.pages.admin_panel">src.ui.pages.admin_panel</a>
+ &#8226;   <a href="#src.ui.pages.dashboard">src.ui.pages.dashboard</a>
+ &#8226;   <a href="#src.ui.pages.invoices">src.ui.pages.invoices</a>
+ &#8226;   <a href="#src.ui.pages.repairs">src.ui.pages.repairs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/__init__.py" type="text/plain"><tt>src.ui</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#src">src</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.login_window">src.ui.login_window</a>
+ &#8226;   <a href="#src.ui.main_window">src.ui.main_window</a>
+ &#8226;   <a href="#src.ui.pages">src.ui.pages</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui.login_window"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/login_window.py" type="text/plain"><tt>src.ui.login_window</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
+ &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
+ &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
+ &#8226;   <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services.auth">src.services.auth</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#src.ui">src.ui</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui.main_window"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/main_window.py" type="text/plain"><tt>src.ui.main_window</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
+ &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
+ &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
+ &#8226;   <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services.auth">src.services.auth</a>
+ &#8226;   <a href="#src.ui">src.ui</a>
+ &#8226;   <a href="#src.ui.pages.admin_panel">src.ui.pages.admin_panel</a>
+ &#8226;   <a href="#src.ui.pages.customers">src.ui.pages.customers</a>
+ &#8226;   <a href="#src.ui.pages.dashboard">src.ui.pages.dashboard</a>
+ &#8226;   <a href="#src.ui.pages.devices">src.ui.pages.devices</a>
+ &#8226;   <a href="#src.ui.pages.invoices">src.ui.pages.invoices</a>
+ &#8226;   <a href="#src.ui.pages.repairs">src.ui.pages.repairs</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui.pages"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/pages/__init__.py" type="text/plain"><tt>src.ui.pages</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#src.ui">src.ui</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.pages.admin_panel">src.ui.pages.admin_panel</a>
+ &#8226;   <a href="#src.ui.pages.customers">src.ui.pages.customers</a>
+ &#8226;   <a href="#src.ui.pages.dashboard">src.ui.pages.dashboard</a>
+ &#8226;   <a href="#src.ui.pages.devices">src.ui.pages.devices</a>
+ &#8226;   <a href="#src.ui.pages.invoices">src.ui.pages.invoices</a>
+ &#8226;   <a href="#src.ui.pages.repairs">src.ui.pages.repairs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui.pages.admin_panel"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/pages/admin_panel.py" type="text/plain"><tt>src.ui.pages.admin_panel</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
+ &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
+ &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
+ &#8226;   <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services.auth">src.services.auth</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#src.services.repair_service">src.services.repair_service</a>
+ &#8226;   <a href="#src.ui.pages">src.ui.pages</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.main_window">src.ui.main_window</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui.pages.customers"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/pages/customers.py" type="text/plain"><tt>src.ui.pages.customers</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
+ &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
+ &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
+ &#8226;   <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services.customer_service">src.services.customer_service</a>
+ &#8226;   <a href="#src.ui.pages">src.ui.pages</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.main_window">src.ui.main_window</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui.pages.dashboard"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/pages/dashboard.py" type="text/plain"><tt>src.ui.pages.dashboard</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
+ &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
+ &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
+ &#8226;   <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services.customer_service">src.services.customer_service</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#src.services.repair_service">src.services.repair_service</a>
+ &#8226;   <a href="#src.ui.pages">src.ui.pages</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.main_window">src.ui.main_window</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui.pages.devices"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/pages/devices.py" type="text/plain"><tt>src.ui.pages.devices</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
+ &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
+ &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
+ &#8226;   <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services.customer_service">src.services.customer_service</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#src.ui.pages">src.ui.pages</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.main_window">src.ui.main_window</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui.pages.invoices"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/pages/invoices.py" type="text/plain"><tt>src.ui.pages.invoices</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
+ &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
+ &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
+ &#8226;   <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services.customer_service">src.services.customer_service</a>
+ &#8226;   <a href="#src.services.invoice_service">src.services.invoice_service</a>
+ &#8226;   <a href="#src.services.repair_service">src.services.repair_service</a>
+ &#8226;   <a href="#src.ui.pages">src.ui.pages</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.main_window">src.ui.main_window</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="src.ui.pages.repairs"></a>
+  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/pages/repairs.py" type="text/plain"><tt>src.ui.pages.repairs</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
+ &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
+ &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
+ &#8226;   <a href="#src.config">src.config</a>
+ &#8226;   <a href="#src.services.customer_service">src.services.customer_service</a>
+ &#8226;   <a href="#src.services.database">src.services.database</a>
+ &#8226;   <a href="#src.services.repair_service">src.services.repair_service</a>
+ &#8226;   <a href="#src.ui.pages">src.ui.pages</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#src.ui.main_window">src.ui.main_window</a>
 
   </div>
 
@@ -8003,6 +8392,8 @@ imported by:
  &#8226;   <a href="#logging">logging</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
+ &#8226;   <a href="#src.services.invoice_service">src.services.invoice_service</a>
+ &#8226;   <a href="#src.services.repair_service">src.services.repair_service</a>
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#tarfile">tarfile</a>
@@ -8194,79 +8585,10 @@ imported by:
  &#8226;   <a href="#importlib.metadata._meta">importlib.metadata._meta</a>
  &#8226;   <a href="#importlib.resources._common">importlib.resources._common</a>
  &#8226;   <a href="#importlib.resources.abc">importlib.resources.abc</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="ui"></a>
-  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/__init__.py" type="text/plain"><tt>ui</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imported by:
-    <a href="#ui.login_window">ui.login_window</a>
- &#8226;   <a href="#ui.main_window">ui.main_window</a>
- &#8226;   <a href="#ui.styles">ui.styles</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="ui.login_window"></a>
-  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/login_window.py" type="text/plain"><tt>ui.login_window</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
- &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
- &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
- &#8226;   <a href="#services.database">services.database</a>
- &#8226;   <a href="#ui">ui</a>
- &#8226;   <a href="#ui.main_window">ui.main_window</a>
- &#8226;   <a href="#ui.styles">ui.styles</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#main.py">main.py</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="ui.main_window"></a>
-  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/main_window.py" type="text/plain"><tt>ui.main_window</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#PyQt6.QtCore">PyQt6.QtCore</a>
- &#8226;   <a href="#PyQt6.QtGui">PyQt6.QtGui</a>
- &#8226;   <a href="#PyQt6.QtWidgets">PyQt6.QtWidgets</a>
- &#8226;   <a href="#services.database">services.database</a>
- &#8226;   <a href="#ui">ui</a>
- &#8226;   <a href="#ui.styles">ui.styles</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#ui.login_window">ui.login_window</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="ui.styles"></a>
-  <a target="code" href="///D:/VS%20Code/RepairQ/RepairQ/src/ui/styles.py" type="text/plain"><tt>ui.styles</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#ui">ui</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#ui.login_window">ui.login_window</a>
- &#8226;   <a href="#ui.main_window">ui.main_window</a>
+ &#8226;   <a href="#src.services.auth">src.services.auth</a>
+ &#8226;   <a href="#src.services.customer_service">src.services.customer_service</a>
+ &#8226;   <a href="#src.services.invoice_service">src.services.invoice_service</a>
+ &#8226;   <a href="#src.services.repair_service">src.services.repair_service</a>
 
   </div>
 

@@ -1,1 +1,3 @@
-# UI Module
+"""
+RepairQ UI Package
+"""
