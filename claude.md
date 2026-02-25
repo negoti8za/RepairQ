@@ -100,9 +100,14 @@ Use it to guide the AI in refactoring, modernizing, and improving the RepairQ Ja
    - Store branding settings in configuration table in SQLite.
 
 8. **Packaging**
-   - Use **jpackage** to create native Windows installer.
-   - Bundle Java runtime.
-   - Ensure `.exe` runs offline without external Java.
+   - Bundle Java 21 runtime using **jlink** (minimal custom JRE, 46 MB).
+   - Create distribution package with:
+     - RepairQ JAR (compiled application)
+     - Bundled JRE (no user installation needed)
+     - All dependencies (36 JARs)
+     - Smart batch launcher
+   - ZIP distribution: **~105 MB** total size
+   - **Zero prerequisites** for end users - extract and run!
 
 9. **Security**
    - Hash passwords.
@@ -142,9 +147,10 @@ Use it to guide the AI in refactoring, modernizing, and improving the RepairQ Ja
 
 Produce a **stable, modern Windows desktop app** that:
 
-- Uses **Java 21 + JavaFX + SQLite + jpackage**.
+- Uses **Java 21 + JavaFX + SQLite + jlink** (bundled JRE).
 - Has a **clean layered architecture**.
 - Supports **tickets, devices, users, invoices**.
 - Includes **first-time admin setup**, **user management**, and **branding/invoice customization**.
 - Is **offline-first, easy to install, maintainable, and secure**.
+- **Requires NO Java installation by users** (Java 21 runtime bundled).
 - Can be **incrementally refactored** from the existing Swing app.
