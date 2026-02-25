@@ -5,8 +5,8 @@
 RepairQ comes with everything you need. **No installation required beyond extracting the files.**
 
 ### Quick Start:
-1. **Extract** the `RepairQ-Windows-v1.0.zip` file to any folder
-2. **Double-click** `RepairQ-Run.bat`
+1. **Extract** the `RepairQ-Windows-v1.0-Professional.zip` file to any folder
+2. **Double-click** `RepairQ.exe` (professional Windows application)
 3. **Login** with default credentials:
    - Username: `admin`
    - Password: `admin`
@@ -30,16 +30,17 @@ That's it! ✓
 ## What's Included
 
 ```
-RepairQ-Windows-v1.0/
-├── RepairQ-Run.bat              ← Click this to launch
-├── RepairQ-0.0.1-SNAPSHOT.jar   ← Application (39 MB)
-├── jre/                          ← Java 21 Runtime (46 MB, bundled)
-├── libs/                         ← All dependencies (36 JARs)
-│   ├── javafx-*.jar             ← UI framework
-│   ├── sqlite-jdbc-*.jar        ← Database driver
-│   ├── hibernate-*.jar          ← ORM framework
+RepairQ-Windows-v1.0-Professional/
+├── RepairQ.exe                      ← Double-click to launch!
+├── RepairQ-Run.bat                  ← Alternative launcher
+├── RepairQ-0.0.1-SNAPSHOT.jar       ← Application (39 MB)
+├── jre/                             ← Java 21 Runtime (46 MB, bundled)
+├── libs/                            ← All dependencies (36 JARs)
+│   ├── javafx-*.jar                 ← UI framework
+│   ├── sqlite-jdbc-*.jar            ← Database driver
+│   ├── hibernate-*.jar              ← ORM framework
 │   └── (32 more dependencies)
-└── README.md                     ← This file
+└── README.md                        ← This file
 ```
 
 ---
