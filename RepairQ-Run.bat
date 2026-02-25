@@ -1,39 +1,39 @@
 @echo off
-REM RepairQ Application Launcher for Windows
-REM This launcher requires Java 21+ to be installed on the system
-
 setlocal enabledelayedexpansion
 
-REM Get the directory where this script is located
+REM ============================================================
+REM RepairQ Application Launcher for Windows
+REM ============================================================
+REM This launcher supports multiple execution modes:
+REM 1. Using fat JAR (if only JAR exists)
+REM 2. Using classpath with separate JARs (if libs folder exists)
+REM ============================================================
+
 cd /d "%~dp0"
 
-REM Create a log file to track execution
-set LOGFILE=RepairQ-run.log
+REM Create log file
+set LOGFILE=%~dp0RepairQ-run.log
 echo [%date% %time%] Starting RepairQ launcher... > "%LOGFILE%"
 
-REM Check if Java is installed
+REM Check if Java is available
 echo [%date% %time%] Checking for Java installation... >> "%LOGFILE%"
 java -version >> "%LOGFILE%" 2>&1
 if errorlevel 1 (
     echo.
     echo ============================================================
-    echo  ERROR: Java is not installed or not in system PATH
+    echo  ERROR: Java 21 LTS is not installed or not in PATH
     echo ============================================================
     echo.
-    echo  RepairQ requires Java 21 LTS or later
+    echo  Please install Java 21 LTS from:
+    echo  https://adoptium.net/temurin/releases/
     echo.
-    echo  Please install Java 21 from one of these sources:
-    echo  1. Oracle JDK: https://www.oracle.com/java/technologies/downloads/
-    echo  2. OpenJDK: https://openjdk.org/
-    echo  3. Temurin (Eclipse): https://adoptium.net/
-    echo.
-    echo  After installation, restart your computer and try again.
+    echo  OR add Java to your PATH environment variable
     echo.
     pause
     exit /b 1
 )
 
-REM Verify the JAR exists
+REM Verify JAR file exists
 if not exist "RepairQ-0.0.1-SNAPSHOT.jar" (
     echo.
     echo ============================================================
@@ -41,37 +41,65 @@ if not exist "RepairQ-0.0.1-SNAPSHOT.jar" (
     echo ============================================================
     echo.
     echo  Expected file: RepairQ-0.0.1-SNAPSHOT.jar
-    echo  Current directory: %cd%
+    echo  Location: %cd%
     echo.
     pause
     exit /b 1
 )
 
-echo [%date% %time%] Java is available. Starting RepairQ application...  >> "%LOGFILE%"
-echo Starting RepairQ...
+REM Determine execution mode
+set "EXEC_MODE=1"
+set "CP=RepairQ-0.0.1-SNAPSHOT.jar"
+
+if exist "libs" (
+    REM Mode 2: Use libs folder with classpath
+    echo [%date% %time%] Found libs folder - using modular classpath... >> "%LOGFILE%"
+    set "EXEC_MODE=2"
+    setlocal enabledelayedexpansion
+    set "CP=RepairQ-0.0.1-SNAPSHOT.jar"
+    
+    for /f "delims=" %%f in ('dir /b "libs\*.jar" 2^>nul') do (
+        set "CP=!CP!;libs\%%f"
+    )
+    endlocal & set "CP=%CP%"
+) else (
+    echo [%date% %time%] Using fat JAR mode... >> "%LOGFILE%"
+)
+
+REM Launch RepairQ
+echo [%date% %time%] Executing RepairQ (Mode !EXEC_MODE!)... >> "%LOGFILE%"
+echo.
+echo ============================================================
+echo  RepairQ - Repair Shop Management System
+echo ============================================================
+echo.
+echo Launching application... (this may take 5-10 seconds)
 echo.
 
-REM Run the application
-REM Parameters:
-REM -Xmx512m          : Maximum heap size of 512 MB
-REM -Djava.awt.headless=false : Enable GUI (default)
-echo [%date% %time%] Executing: java -Xmx512m -jar "RepairQ-0.0.1-SNAPSHOT.jar" >> "%LOGFILE%"
-java -Xmx512m -jar "RepairQ-0.0.1-SNAPSHOT.jar" %* >> "%LOGFILE%" 2>&1
+REM Execute with proper classpath and module configuration
+java -Xmx512m ^
+    -Dfile.encoding=UTF-8 ^
+    -cp "%CP%" ^
+    com.repairq.app.RepairQ >> "%LOGFILE%" 2>&1
 
-if errorlevel 1 (
+set "EXIT_CODE=%ERRORLEVEL%"
+
+if %EXIT_CODE% neq 0 (
     echo.
     echo ============================================================
-    echo  ERROR: RepairQ failed to start (Exit Code: %ERRORLEVEL%)
+    echo  ERROR: RepairQ failed with exit code %EXIT_CODE%
     echo ============================================================
     echo.
-    echo  Check the log file: %LOGFILE%
+    echo Check the log file for details:
+    echo  %LOGFILE%
     echo.
     type "%LOGFILE%"
     echo.
     pause
-    exit /b 1
+    exit /b %EXIT_CODE%
 )
 
 echo [%date% %time%] RepairQ closed successfully >> "%LOGFILE%"
 exit /b 0
+
 
