@@ -3,8 +3,7 @@ Dashboard Page - Overview and statistics
 """
 
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QGridLayout,
-    QCard, QCardLayout
+    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QGridLayout
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
