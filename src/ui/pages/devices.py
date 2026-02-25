@@ -13,6 +13,12 @@ from src.services.database import Database
 from src.services.customer_service import CustomerService
 
 
+def make_table_read_only(table: QTableWidget) -> None:
+    """Make a table read-only (cannot edit cells by clicking)"""
+    table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+    table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+
+
 class DevicesPage(QWidget):
     """Device tracking and management"""
     
@@ -63,6 +69,13 @@ class DevicesPage(QWidget):
                 border: 1px solid {COLOR_BORDER};
             }}
         """)
+        # Make columns stretch equally
+        header = self.table.horizontalHeader()
+        header.setStretchLastSection(True)
+        for i in range(7):
+            header.setSectionResizeMode(i, header.ResizeMode.Stretch)
+        # Make table read-only
+        make_table_read_only(self.table)
         layout.addWidget(self.table)
         
         self.setLayout(layout)
@@ -87,10 +100,21 @@ class DevicesPage(QWidget):
             self.table.setItem(row, 4, QTableWidgetItem(device['serial_number'] or ""))
             self.table.setItem(row, 5, QTableWidgetItem(device['customer_name'] or ""))
             
+            # Action button
+            btn_container = QWidget()
+            btn_layout = QHBoxLayout()
+            btn_layout.setContentsMargins(2, 2, 2, 2)
+            btn_layout.setSpacing(5)
+            
             delete_btn = QPushButton("Delete")
             delete_btn.setMaximumWidth(60)
+            delete_btn.setMaximumHeight(28)
             delete_btn.clicked.connect(lambda checked, did=device['id']: self.delete_device(did))
-            self.table.setCellWidget(row, 6, delete_btn)
+            
+            btn_layout.addWidget(delete_btn)
+            btn_layout.addStretch()
+            btn_container.setLayout(btn_layout)
+            self.table.setCellWidget(row, 6, btn_container)
     
     def create_device(self):
         """Create new device"""

@@ -4,6 +4,7 @@ Authentication Service - User validation and role management
 
 from typing import Optional, Dict, List
 from src.services.database import Database, ROLE_ADMIN, ROLE_STAFF, ROLE_TECHNICIAN
+from src.utils.logger import AppLogger
 
 
 class AuthService:
@@ -33,21 +34,30 @@ class AuthService:
         Authenticate user
         Returns: (success, error_message, user_data)
         """
-        if not username.strip() or not password.strip():
-            return False, "Username and password required", None
-        
-        result = Database.authenticate_user(username, password)
-        
-        if not result['authenticated']:
-            return False, "Invalid username or password", None
-        
-        user_data = {k: v for k, v in result.items() if k != 'authenticated'}
-        cls._current_user = user_data
-        return True, None, user_data
+        try:
+            if not username.strip() or not password.strip():
+                AppLogger.warning(f"Login attempt with empty credentials")
+                return False, "Username and password required", None
+            
+            result = Database.authenticate_user(username, password)
+            
+            if not result['authenticated']:
+                AppLogger.warning(f"Failed login attempt for username: {username}")
+                return False, "Invalid username or password", None
+            
+            user_data = {k: v for k, v in result.items() if k != 'authenticated'}
+            cls._current_user = user_data
+            AppLogger.info(f"User logged in: {username}, Role: {user_data.get('role')}")
+            return True, None, user_data
+        except Exception as e:
+            AppLogger.error(f"Authentication error for user {username}: {e}")
+            return False, "Authentication error", None
     
     @classmethod
     def logout(cls):
         """Clear current user session"""
+        if cls._current_user:
+            AppLogger.info(f"User logged out: {cls._current_user.get('username', 'Unknown')}")
         cls._current_user = None
     
     @classmethod

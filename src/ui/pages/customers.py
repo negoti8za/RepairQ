@@ -12,6 +12,12 @@ from src.config import *
 from src.services.customer_service import CustomerService
 
 
+def make_table_read_only(table: QTableWidget) -> None:
+    """Make a table read-only (cannot edit cells by clicking)"""
+    table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+    table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+
+
 class CustomersPage(QWidget):
     """Customer management"""
     
@@ -62,6 +68,13 @@ class CustomersPage(QWidget):
                 border: 1px solid {COLOR_BORDER};
             }}
         """)
+        # Make columns stretch equally
+        header = self.table.horizontalHeader()
+        header.setStretchLastSection(True)
+        for i in range(6):
+            header.setSectionResizeMode(i, header.ResizeMode.Stretch)
+        # Make table read-only
+        make_table_read_only(self.table)
         layout.addWidget(self.table)
         
         self.setLayout(layout)
@@ -78,20 +91,27 @@ class CustomersPage(QWidget):
             self.table.setItem(row, 3, QTableWidgetItem(customer['email'] or ""))
             self.table.setItem(row, 4, QTableWidgetItem(customer['city'] or ""))
             
+            # Actions cell
+            btn_container = QWidget()
             btn_layout = QHBoxLayout()
+            btn_layout.setContentsMargins(2, 2, 2, 2)
+            btn_layout.setSpacing(5)
+            
             edit_btn = QPushButton("Edit")
             edit_btn.setMaximumWidth(50)
+            edit_btn.setMaximumHeight(28)
             edit_btn.clicked.connect(lambda checked, cid=customer['id']: self.edit_customer(cid))
             
             delete_btn = QPushButton("Delete")
             delete_btn.setMaximumWidth(60)
+            delete_btn.setMaximumHeight(28)
             delete_btn.clicked.connect(lambda checked, cid=customer['id']: self.delete_customer(cid))
             
-            container = QWidget()
-            container.setLayout(btn_layout)
             btn_layout.addWidget(edit_btn)
             btn_layout.addWidget(delete_btn)
-            self.table.setCellWidget(row, 5, container)
+            btn_layout.addStretch()
+            btn_container.setLayout(btn_layout)
+            self.table.setCellWidget(row, 5, btn_container)
     
     def create_customer(self):
         """Create new customer"""

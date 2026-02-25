@@ -20,18 +20,28 @@ class RepairService:
     @staticmethod
     def create_ticket(customer_id: int, device_id: Optional[int] = None,
                      description: str = "", priority: str = "NORMAL",
-                     assigned_to: Optional[int] = None) -> Optional[int]:
-        """Create repair ticket"""
+                     assigned_to: Optional[int] = None,
+                     device_type_id: Optional[int] = None,
+                     device_brand: str = "",
+                     device_model: str = "",
+                     device_serial: str = "",
+                     customer_issue: str = "",
+                     fault_found: str = "") -> Optional[int]:
+        """Create repair ticket with all details"""
         if not customer_id or not description.strip():
             return None
         
         ticket_number = RepairService._generate_ticket_number()
         query = '''
             INSERT INTO repair_tickets
-            (ticket_number, customer_id, device_id, description, priority, assigned_to)
-            VALUES (?, ?, ?, ?, ?, ?)
+            (ticket_number, customer_id, device_id, description, priority, assigned_to,
+             device_type_id, device_brand, device_model, device_serial, customer_issue, fault_found)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         '''
-        Database.execute_update(query, (ticket_number, customer_id, device_id, description, priority, assigned_to))
+        Database.execute_update(query, (
+            ticket_number, customer_id, device_id, description, priority, assigned_to,
+            device_type_id, device_brand, device_model, device_serial, customer_issue, fault_found
+        ))
         
         result = Database.execute_query(
             "SELECT id FROM repair_tickets WHERE ticket_number = ?",
@@ -65,7 +75,11 @@ class RepairService:
     @staticmethod
     def update_ticket(ticket_id: int, **kwargs) -> bool:
         """Update ticket"""
-        allowed_fields = {'description', 'status', 'priority', 'assigned_to', 'completed_at'}
+        allowed_fields = {
+            'description', 'status', 'priority', 'assigned_to', 'completed_at',
+            'device_id', 'device_type_id', 'device_brand', 'device_model', 
+            'device_serial', 'customer_issue', 'fault_found'
+        }
         fields = {k: v for k, v in kwargs.items() if k in allowed_fields}
         
         if not fields or not ticket_id:

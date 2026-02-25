@@ -10,6 +10,7 @@ from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QFont, QIcon, QAction
 from src.config import *
 from src.services.auth import AuthService
+from src.utils.logger import AppLogger
 from src.ui.pages.dashboard import DashboardPage
 from src.ui.pages.repairs import RepairsPage
 from src.ui.pages.customers import CustomersPage
@@ -27,57 +28,106 @@ class MainWindow(QMainWindow):
         self.init_ui()
     
     def init_ui(self):
-        """Initialize main window"""
+        """Initialize main window with error handling"""
         self.setWindowTitle(f"{APP_NAME} v{APP_VERSION}")
         self.setGeometry(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT)
         self.setMinimumSize(WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT)
         self.setStyleSheet(self._get_stylesheet())
         
-        # Create menu bar
-        self._create_menu_bar()
-        
-        # Create status bar
-        self._create_status_bar()
-        
-        # Create central widget
-        central_widget = QWidget()
-        self.setCentralWidget(central_widget)
-        
-        # Main layout
-        main_layout = QVBoxLayout()
-        main_layout.setContentsMargins(0, 0, 0, 0)
-        main_layout.setSpacing(0)
-        
-        # Header with user info
-        header = self._create_header()
-        main_layout.addWidget(header)
-        
-        # Tabbed interface
-        self.tabs = QTabWidget()
-        self.tabs.setStyleSheet(self._get_tab_stylesheet())
-        
-        # Add pages
-        self.dashboard_page = DashboardPage()
-        self.repairs_page = RepairsPage()
-        self.customers_page = CustomersPage()
-        self.devices_page = DevicesPage()
-        self.invoices_page = InvoicesPage()
-        
-        # Add tabs based on user role
-        user = AuthService.get_current_user()
-        self.tabs.addTab(self.dashboard_page, "Dashboard")
-        self.tabs.addTab(self.repairs_page, "Repair Tickets")
-        self.tabs.addTab(self.customers_page, "Customers")
-        self.tabs.addTab(self.devices_page, "Devices")
-        self.tabs.addTab(self.invoices_page, "Invoices")
-        
-        if AuthService.is_admin():
-            self.admin_panel = AdminPanel()
-            self.tabs.addTab(self.admin_panel, "Admin Panel")
-        
-        main_layout.addWidget(self.tabs, 1)
-        
-        central_widget.setLayout(main_layout)
+        try:
+            # Create menu bar
+            self._create_menu_bar()
+            
+            # Create status bar
+            self._create_status_bar()
+            
+            # Create central widget
+            central_widget = QWidget()
+            self.setCentralWidget(central_widget)
+            
+            # Main layout
+            main_layout = QVBoxLayout()
+            main_layout.setContentsMargins(0, 0, 0, 0)
+            main_layout.setSpacing(0)
+            
+            # Header with user info
+            header = self._create_header()
+            main_layout.addWidget(header)
+            
+            # Tabbed interface
+            self.tabs = QTabWidget()
+            self.tabs.setStyleSheet(self._get_tab_stylesheet())
+            
+            # Add pages with error handling
+            try:
+                self.dashboard_page = DashboardPage()
+                self.tabs.addTab(self.dashboard_page, "Dashboard")
+            except Exception as e:
+                print(f"Error loading dashboard: {e}")
+                self.tabs.addTab(QWidget(), "Dashboard (Error)")
+            
+            try:
+                self.repairs_page = RepairsPage()
+                self.tabs.addTab(self.repairs_page, "Repair Tickets")
+            except Exception as e:
+                print(f"Error loading repairs: {e}")
+                self.tabs.addTab(QWidget(), "Repair Tickets (Error)")
+            
+            try:
+                self.customers_page = CustomersPage()
+                self.tabs.addTab(self.customers_page, "Customers")
+            except Exception as e:
+                print(f"Error loading customers: {e}")
+                self.tabs.addTab(QWidget(), "Customers (Error)")
+            
+            try:
+                self.devices_page = DevicesPage()
+                self.tabs.addTab(self.devices_page, "Devices")
+            except Exception as e:
+                print(f"Error loading devices: {e}")
+                self.tabs.addTab(QWidget(), "Devices (Error)")
+            
+            try:
+                self.invoices_page = InvoicesPage()
+                self.tabs.addTab(self.invoices_page, "Invoices")
+            except Exception as e:
+                print(f"Error loading invoices: {e}")
+                self.tabs.addTab(QWidget(), "Invoices (Error)")
+            
+            # Add admin panel if user is admin
+            try:
+                user = AuthService.get_current_user()
+                print(f"[MainWindow] get_current_user returned: {user}")
+                if user:
+                    print(f"[MainWindow] User role: {user.get('role')}")
+                    print(f"[MainWindow] is_admin() returns: {AuthService.is_admin()}")
+                    if user.get('role') == 'ADMIN' or AuthService.is_admin():
+                        print(f"[MainWindow] Creating AdminPanel...")
+                        try:
+                            self.admin_panel = AdminPanel()
+                            self.tabs.addTab(self.admin_panel, "Admin Panel")
+                            print("[MainWindow] Admin panel loaded successfully")
+                        except Exception as admin_error:
+                            print(f"[MainWindow] AdminPanel creation failed: {admin_error}")
+                            import traceback
+                            traceback.print_exc()
+                            self.tabs.addTab(QWidget(), "Admin Panel (Error)")
+                    else:
+                        print(f"[MainWindow] User is not admin. Role: {user.get('role')}")
+                else:
+                    print(f"[MainWindow] No user data available")
+            except Exception as e:
+                print(f"[MainWindow] Error loading admin panel: {e}")
+                import traceback
+                traceback.print_exc()
+            
+            main_layout.addWidget(self.tabs, 1)
+            central_widget.setLayout(main_layout)
+        except Exception as e:
+            print(f"Critical error in main window initialization: {e}")
+            import traceback
+            traceback.print_exc()
+            raise
     
     def _create_header(self) -> QWidget:
         """Create header with user info and tools"""
@@ -139,12 +189,6 @@ class MainWindow(QMainWindow):
         # File menu
         file_menu = menubar.addMenu("File")
         
-        settings_action = QAction("Settings", self)
-        settings_action.triggered.connect(self.show_settings)
-        file_menu.addAction(settings_action)
-        
-        file_menu.addSeparator()
-        
         exit_action = QAction("Exit", self)
         exit_action.triggered.connect(self.close)
         file_menu.addAction(exit_action)
@@ -168,16 +212,17 @@ class MainWindow(QMainWindow):
         AuthService.logout()
         self.switch_to_login()
     
-    def show_settings(self):
-        """Show settings dialog"""
-        QMessageBox.information(self, "Settings", "Settings dialog - Coming soon")
+
     
     def show_about(self):
         """Show about dialog"""
         QMessageBox.about(self, f"About {APP_NAME}",
-            f"{APP_NAME} v{APP_VERSION}\n"
-            f"by {APP_AUTHOR}\n\n"
-            "Modern Repair Shop Management System")
+            f"{APP_NAME} v{APP_VERSION}\n\n"
+            "Modern Repair Shop Management System\n\n"
+            "Originally developed by Zoran Jankov\n"
+            "Enhanced and modernized by Robert Visser\n\n"
+            "This is an open-source fork dedicated to improving\n"
+            "repair shop operations and customer service.")
     
     def _get_stylesheet(self) -> str:
         """Get stylesheet"""
@@ -190,6 +235,31 @@ class MainWindow(QMainWindow):
                 color: {COLOR_TEXT_PRIMARY};
                 font-family: {FONT_FAMILY};
                 font-size: {FONT_SIZE_NORMAL}pt;
+            }}
+            QPushButton {{
+                background-color: {COLOR_PRIMARY};
+                color: white;
+                border: none;
+                padding: 5px 12px;
+                font-weight: bold;
+                border-radius: 3px;
+                min-width: 65px;
+            }}
+            QPushButton:hover {{
+                background-color: #005a9e;
+            }}
+            QPushButton:pressed {{
+                background-color: #004080;
+            }}
+            QPushButton:disabled {{
+                background-color: #aaa;
+                color: #ddd;
+            }}
+            QPushButton[danger="true"] {{
+                background-color: {COLOR_DANGER};
+            }}
+            QPushButton[danger="true"]:hover {{
+                background-color: #a00620;
             }}
             QMenuBar {{
                 background-color: {COLOR_BACKGROUND};
