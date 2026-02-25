@@ -28,11 +28,13 @@ class Database:
                 cls._create_schema()
                 cls._create_default_user()
                 cls._create_default_settings()
+                cls._create_default_services()
                 AppLogger.info("Database initialization completed successfully")
             else:
                 AppLogger.info(f"Database loaded from {DATABASE_PATH}")
                 # Ensure all tables exist (handles cases where new tables were added after initial creation)
                 cls._create_schema()
+                cls._create_default_services()
         except Exception as e:
             AppLogger.error(f"Database initialization failed: {e}")
             raise
@@ -305,7 +307,116 @@ class Database:
         
         conn.commit()
         conn.close()
-    
+
+    @classmethod
+    def _create_default_services(cls):
+        """Seed default service categories and repair services (runs on every startup, uses INSERT OR IGNORE)"""
+        conn = sqlite3.connect(DATABASE_PATH)
+        cursor = conn.cursor()
+
+        # Default categories with their services: (category_name, [(service_name, price), ...])
+        default_data = [
+            ("Diagnostics", [
+                ("General fault diagnosis", 30.00),
+                ("No power / no boot", 35.00),
+                ("Liquid damage inspection", 45.00),
+                ("Performance assessment", 30.00),
+            ]),
+            ("Hardware Repairs – Desktop", [
+                ("PSU replacement (labour only)", 50.00),
+                ("Motherboard repair (board-level)", 120.00),
+                ("RAM replacement (labour only)", 40.00),
+                ("GPU replacement (labour only)", 60.00),
+                ("Case / fan replacement", 45.00),
+            ]),
+            ("Hardware Repairs – Laptop", [
+                ("Screen replacement", 95.00),
+                ("Keyboard replacement", 65.00),
+                ("Charging port repair", 85.00),
+                ("Hinge repair", 75.00),
+                ("Battery replacement", 65.00),
+            ]),
+            ("Hardware Repairs – Mac", [
+                ("MacBook screen replacement", 180.00),
+                ("Logic board repair", 220.00),
+                ("iMac upgrades", 120.00),
+            ]),
+            ("Data Services", [
+                ("Data recovery (HDD/SSD logical)", 120.00),
+                ("External drive recovery", 95.00),
+                ("Data transfer (old to new PC)", 60.00),
+                ("Backup setup", 55.00),
+                ("RAID recovery (software level)", 250.00),
+            ]),
+            ("Software Services", [
+                ("Windows install / reinstall", 60.00),
+                ("macOS reinstall", 70.00),
+                ("Virus / malware removal", 65.00),
+                ("Driver fixes", 45.00),
+                ("OS upgrades", 55.00),
+                ("Software troubleshooting", 50.00),
+            ]),
+            ("Upgrades", [
+                ("SSD upgrade (labour only)", 45.00),
+                ("RAM upgrade (labour only)", 40.00),
+                ("GPU upgrade (labour only)", 60.00),
+                ("CPU upgrade (labour only)", 70.00),
+                ("Custom build assembly", 120.00),
+            ]),
+            ("Mobile / Tablet Repairs", [
+                ("iPhone screen replacement", 75.00),
+                ("Android screen replacement", 70.00),
+                ("Mobile charging port repair", 65.00),
+                ("Mobile battery replacement", 55.00),
+                ("Tablet repair", 80.00),
+            ]),
+            ("Business / Managed Services", [
+                ("Network setup", 120.00),
+                ("Router / firewall install", 150.00),
+                ("Office PC setup", 85.00),
+                ("Email configuration", 60.00),
+                ("Server maintenance (per hour)", 95.00),
+                ("On-site support (per hour)", 80.00),
+            ]),
+            ("Gaming / Custom Builds", [
+                ("Custom PC build", 140.00),
+                ("RGB setup", 50.00),
+                ("Cooling upgrades", 70.00),
+                ("Overclock tuning", 85.00),
+            ]),
+            ("Console Repairs", [
+                ("HDMI port repair", 85.00),
+                ("Overheating repair (clean + thermal paste)", 65.00),
+                ("Console hard drive replacement / upgrade", 95.00),
+            ]),
+            ("Admin / Non-Repair", [
+                ("Bench Fee / Inspection Fee", 30.00),
+                ("No Fix – No Fee", 0.00),
+                ("Warranty Repair", 0.00),
+            ]),
+        ]
+
+        for category_name, services in default_data:
+            # Insert category (ignore if already exists)
+            cursor.execute(
+                "INSERT OR IGNORE INTO service_categories (name) VALUES (?)", (category_name,)
+            )
+            cursor.execute("SELECT id FROM service_categories WHERE name = ?", (category_name,))
+            cat_row = cursor.fetchone()
+            if not cat_row:
+                continue
+            cat_id = cat_row[0]
+
+            for service_name, price in services:
+                cursor.execute(
+                    "INSERT OR IGNORE INTO repair_services (name, category_id, category, base_price) VALUES (?, ?, ?, ?)",
+                    (service_name, cat_id, category_name, price)
+                )
+
+        conn.commit()
+        conn.close()
+        AppLogger.debug("Default service categories and services ensured")
+
     @staticmethod
     def _hash_password(password: str) -> str:
         """Hash password"""

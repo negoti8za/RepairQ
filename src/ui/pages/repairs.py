@@ -81,8 +81,10 @@ class RepairsPage(QWidget):
         header.setStretchLastSection(True)
         for i in range(6):
             header.setSectionResizeMode(i, header.ResizeMode.Stretch)
-        # Make table read-only
+        # Make table read-only and ensure rows are tall enough for action buttons
         make_table_read_only(self.table)
+        self.table.verticalHeader().setDefaultSectionSize(38)
+        self.table.verticalHeader().setMinimumSectionSize(38)
         layout.addWidget(self.table)
         
         self.setLayout(layout)
@@ -568,7 +570,7 @@ class TicketDetailDialog(QDialog):
         totals_layout = QHBoxLayout()
         totals_layout.addStretch()
         totals_layout.addWidget(QLabel("Total:"))
-        self.items_total_label = QLabel("$0.00")
+        self.items_total_label = QLabel(f"{get_currency_symbol(get_app_currency())}0.00")
         self.items_total_label.setStyleSheet("font-weight: bold;")
         totals_layout.addWidget(self.items_total_label)
         

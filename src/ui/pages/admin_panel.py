@@ -451,10 +451,8 @@ class ServiceCatalogTab(QWidget):
         services = ServiceCatalog.list_services()
         self.table.setRowCount(len(services))
         
-        # Get currency symbol
-        currency_result = Database.execute_query("SELECT currency FROM invoice_customization LIMIT 1")
-        currency = currency_result[0]['currency'] if currency_result else 'USD'
-        symbol = self._get_currency_symbol(currency)
+        # Get currency symbol from app settings
+        symbol = get_currency_symbol(get_app_currency())
         
         for row, service in enumerate(services):
             self.table.setItem(row, 0, QTableWidgetItem(str(service['id'])))
@@ -520,26 +518,6 @@ class ServiceCatalogTab(QWidget):
             from src.services.repair_service import ServiceCatalog
             ServiceCatalog.delete_service(service_id)
             self.load_services()
-    
-    def _get_currency_symbol(self, currency_code: str) -> str:
-        """Get currency symbol for currency code"""
-        symbols = {
-            'USD': '$',
-            'EUR': '€',
-            'GBP': '£',
-            'JPY': '¥',
-            'CAD': '$',
-            'AUD': '$',
-            'CHF': 'CHF',
-            'CNY': '¥',
-            'INR': '₹',
-            'MXN': '$',
-            'AED': 'د.إ',
-            'SGD': '$',
-            'HKD': '$',
-            'NZD': '$',
-        }
-        return symbols.get(currency_code, currency_code + ' ')
 
 
 class ServiceDialog(QDialog):
@@ -1085,17 +1063,8 @@ class InvoiceTrackingTab(QWidget):
         
         self.table.setRowCount(len(invoices))
         
-        # Get currency
-        try:
-            currency_result = Database.execute_query("SELECT currency FROM invoice_customization LIMIT 1")
-            if currency_result:
-                currency_row = dict(currency_result[0]) if hasattr(currency_result[0], 'keys') else currency_result[0]
-                currency = currency_row.get('currency', 'USD')
-            else:
-                currency = 'USD'
-        except Exception:
-            currency = 'USD'
-        symbol = self._get_currency_symbol(currency)
+        # Get currency symbol from app settings
+        symbol = get_currency_symbol(get_app_currency())
         
         for row, invoice in enumerate(invoices):
             self.table.setRowHeight(row, 35)
@@ -1145,15 +1114,6 @@ class InvoiceTrackingTab(QWidget):
         dialog = InvoiceDetailDialog(invoice_id, self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
             self.load_invoices()
-    
-    def _get_currency_symbol(self, currency_code: str) -> str:
-        """Get currency symbol"""
-        symbols = {
-            'USD': '$', 'EUR': '€', 'GBP': '£', 'JPY': '¥', 'CAD': '$', 'AUD': '$',
-            'CHF': 'CHF', 'CNY': '¥', 'INR': '₹', 'MXN': '$', 'AED': 'د.إ', 'SGD': '$',
-            'HKD': '$', 'NZD': '$',
-        }
-        return symbols.get(currency_code, currency_code + ' ')
 
 
 

@@ -99,17 +99,8 @@ class InvoicesPage(QWidget):
             customer_name = customer['name'] if customer else "Unknown"
             self.table.setItem(row, 2, QTableWidgetItem(customer_name))
             
-            # Get currency symbol from database or use default
-            try:
-                currency_result = Database.execute_query("SELECT currency FROM invoice_customization LIMIT 1")
-                if currency_result and len(currency_result) > 0:
-                    currency_row = currency_result[0]
-                    currency = dict(currency_row)['currency'] if isinstance(currency_row, tuple) else currency_row['currency']
-                else:
-                    currency = 'USD'
-            except Exception:
-                currency = 'USD'
-            symbol = get_currency_symbol(currency)
+            # Get currency symbol from app settings
+            symbol = get_currency_symbol(get_app_currency())
             amount = f"{symbol}{invoice['total_amount']:.2f}"
             self.table.setItem(row, 3, QTableWidgetItem(amount))
             
@@ -667,11 +658,11 @@ Outstanding: {symbol}{outstanding:.2f}
 
         symbol = self._get_currency_symbol(currency)
 
-        # Logo
+        # Logo - constrained size so it never breaks the layout
         logo_html = ''
         if logo_blob:
             import base64
-            logo_html = f'<img src="data:image/png;base64,{base64.b64encode(logo_blob).decode()}" style="max-height:55px;display:block;">'
+            logo_html = f'<img src="data:image/png;base64,{base64.b64encode(logo_blob).decode()}" style="max-width:150px;max-height:60px;display:block;margin-bottom:4px;object-fit:contain;">'
 
         # Build line items rows
         item_rows_html = ''
@@ -733,6 +724,7 @@ Outstanding: {symbol}{outstanding:.2f}
 {header_band}
 <div class="hdr">
   <div class="hdr-left">
+    {logo_html}
     <h1>{company_name}</h1>
     <div class="co-info">
       {company_address}<br>
@@ -740,7 +732,6 @@ Outstanding: {symbol}{outstanding:.2f}
     </div>
   </div>
   <div class="hdr-right">
-    {logo_html}
     <div class="inv-title">INVOICE</div>
     <div class="inv-num"># {invoice_dict.get('invoice_number','')}</div>
   </div>
